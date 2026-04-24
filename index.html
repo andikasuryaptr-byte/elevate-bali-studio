@@ -29,7 +29,7 @@
         <div class="hero__grain"></div>
         <div class="hero__gradient"></div>
         <div class="hero__content">
-            <p class="hero__eyebrow animate-in" data-delay="0">Digital Studio — Bali, Indonesia</p>
+            <p class="hero__eyebrow animate-in" data-delay="0">Digital Studio — Denpasar, Bali</p>
             <h1 class="hero__title animate-in" data-delay="1">Elevating Brands Through<br><span class="hero__title-accent">Strategic Digital Experiences</span></h1>
             <p class="hero__subtitle animate-in" data-delay="2">We craft high-performance websites that transform local businesses into global contenders.</p>
             <div class="hero__actions animate-in" data-delay="3">
@@ -107,21 +107,38 @@
                 <p class="section-header__desc">Designs built to impress and engineered to convert.</p>
             </div>
             <div class="portfolio__grid">
-                <article class="portfolio-card reveal-up">
+                <article class="portfolio-card reveal-up" data-lightbox-src="images/portfolio-villa.png" data-lightbox-title="Villa Azure Bali" data-lightbox-desc="A premium direct booking platform for a luxury villa in Ubud. Features integrated reservation system, virtual tours, and multi-language support — designed to eliminate OTA dependency and maximize direct revenue.">
                     <div class="portfolio-card__img"><img src="images/portfolio-villa.png" alt="Villa Azure luxury booking website" loading="lazy"></div>
                     <div class="portfolio-card__info"><div><h3>Villa Azure Bali</h3><p>Direct Booking & Hospitality</p></div><span class="portfolio-card__arrow">&rarr;</span></div>
                 </article>
-                <article class="portfolio-card reveal-up" data-delay="1">
+                <article class="portfolio-card reveal-up" data-delay="1" data-lightbox-src="images/portfolio-craft.png" data-lightbox-title="Artisan Heritage" data-lightbox-desc="A sophisticated e-commerce experience for high-end Balinese artisan crafts. Custom product photography, international shipping integration, and conversion-optimized checkout flow for the global market.">
                     <div class="portfolio-card__img"><img src="images/portfolio-craft.png" alt="Artisan Heritage e-commerce" loading="lazy"></div>
                     <div class="portfolio-card__info"><div><h3>Artisan Heritage</h3><p>E-Commerce & Brand Identity</p></div><span class="portfolio-card__arrow">&rarr;</span></div>
                 </article>
-                <article class="portfolio-card reveal-up" data-delay="2">
+                <article class="portfolio-card reveal-up" data-delay="2" data-lightbox-src="images/portfolio-cafe.png" data-lightbox-title="Kopi & Co." data-lightbox-desc="A modern digital menu and analytics dashboard for an upscale Bali cafe. QR-code ordering, real-time inventory tracking, and customer analytics — replacing traditional menus with a seamless digital experience.">
                     <div class="portfolio-card__img"><img src="images/portfolio-cafe.png" alt="Kopi and Co cafe digital menu" loading="lazy"></div>
                     <div class="portfolio-card__info"><div><h3>Kopi &amp; Co.</h3><p>Digital Menu & Analytics</p></div><span class="portfolio-card__arrow">&rarr;</span></div>
                 </article>
             </div>
         </div>
     </section>
+
+    <!-- Portfolio Lightbox Modal -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project preview">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Close preview">&times;</button>
+        <div class="lightbox__container">
+            <div class="lightbox__img-wrap">
+                <img class="lightbox__img" id="lightboxImg" src="" alt="">
+            </div>
+            <div class="lightbox__details">
+                <h3 class="lightbox__title" id="lightboxTitle"></h3>
+                <p class="lightbox__desc" id="lightboxDesc"></p>
+                <a href="#contact" class="btn btn--primary lightbox__cta" id="lightboxCta">Discuss This Project</a>
+            </div>
+        </div>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous project">&#8249;</button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next project">&#8250;</button>
+    </div>
 
     <section class="contact" id="contact">
         <div class="container">
@@ -133,19 +150,22 @@
                     <div class="contact__details">
                         <div class="contact__detail">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <div><strong>Studio</strong><span>Canggu, Bali, Indonesia</span></div>
+                            <div><strong>Studio</strong><span>Denpasar, Bali, Indonesia</span></div>
                         </div>
                         <div class="contact__detail">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <div><strong>Email</strong><span>hello@elevatebali.studio</span></div>
+                            <div><strong>Email</strong><span>andikasuryaptr@gmail.com</span></div>
                         </div>
                     </div>
                 </div>
                 <form class="contact__form reveal-up" data-delay="1" id="contactForm">
-                    <div class="form-group"><input type="text" id="formName" required autocomplete="name"><label for="formName">Full Name</label></div>
-                    <div class="form-group"><input type="email" id="formEmail" required autocomplete="email"><label for="formEmail">Email Address</label></div>
+                    <input type="hidden" name="csrf" id="formCsrf" value="">
+                    <!-- Honeypot — hidden from users, bots fill it -->
+                    <div style="position:absolute;left:-9999px;"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+                    <div class="form-group"><input type="text" id="formName" name="name" required autocomplete="name"><label for="formName">Full Name</label></div>
+                    <div class="form-group"><input type="email" id="formEmail" name="email" required autocomplete="email"><label for="formEmail">Email Address</label></div>
                     <div class="form-group">
-                        <select id="formService" required>
+                        <select id="formService" name="service" required>
                             <option value="" disabled selected hidden>Select a Service</option>
                             <option value="web">Bespoke Web Development</option>
                             <option value="hospitality">Hospitality Solutions</option>
@@ -153,8 +173,9 @@
                             <option value="other">Something Else</option>
                         </select>
                     </div>
-                    <div class="form-group"><textarea id="formMessage" rows="4" required></textarea><label for="formMessage">Tell us about your project</label></div>
+                    <div class="form-group"><textarea id="formMessage" name="message" rows="4" required></textarea><label for="formMessage">Tell us about your project</label></div>
                     <button type="submit" class="btn btn--primary btn--lg btn--block" id="formSubmit"><span>Send Message</span></button>
+                    <p class="form-status" id="formStatus"></p>
                 </form>
             </div>
         </div>
